@@ -83,7 +83,7 @@ _IRQL_requires_max_(PASSIVE_LEVEL) EXTERN_C
         _In_ PIMAGE_EXPORT_DIRECTORY directory, _In_ ULONG_PTR directory_base,
         _In_ ULONG_PTR directory_end, _In_opt_ void* context);
 
-static std::array<char, 5> DdimonpTagToString(_In_ ULONG tag_value);
+static std::array<char, 6> DdimonpTagToString(_In_ ULONG tag_value);
 
 template <typename T>
 static T DdimonpFindOrignal(_In_ T handler);
@@ -157,6 +157,11 @@ static ShadowHookTarget g_ddimonp_hook_targets[] = {
     },
     {
         RTL_CONSTANT_STRING(L"NTQUERYSYSTEMINFORMATION"),
+        DdimonpHandleNtQuerySystemInformation,
+        nullptr,
+    },
+    {
+        RTL_CONSTANT_STRING(L"NtQuerySystemTime"),
         DdimonpHandleNtQuerySystemInformation,
         nullptr,
     },
